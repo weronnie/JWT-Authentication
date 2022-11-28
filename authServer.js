@@ -20,6 +20,7 @@ app.post('/token', (req, res) => {
 })
 
 app.delete('/logout', (req, res) => {
+  console.log(refreshTokens)
   refreshTokens = refreshTokens.filter(token => token !== req.body.token)
   res.sendStatus(204)
 })
@@ -37,7 +38,7 @@ app.post('/login', (req, res) => {
 })
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '24h' })
 }
 
 app.listen(4000)
